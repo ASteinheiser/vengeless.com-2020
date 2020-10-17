@@ -1,8 +1,9 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import 'fontsource-roboto'
 
 import '../styles/globals.css'
+import '../styles/layout.css'
 
 const theme = createMuiTheme({
   palette: {
