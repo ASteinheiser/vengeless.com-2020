@@ -1,7 +1,9 @@
+import Button from '@material-ui/core/Button';
+
 export default function Home() {
   return (
-    <div>
-      Hello world!
-    </div>
+    <Button variant="contained" color="primary">
+      Hello World
+    </Button>
   )
 }

@@ -1,3 +1,5 @@
+import 'fontsource-roboto'
+
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
