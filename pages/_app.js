@@ -1,25 +1,27 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { useState } from 'react'
+import { ThemeProvider } from '@material-ui/core/styles'
+
+import lightTheme from '../styles/themes/light-theme'
+import darkTheme from '../styles/themes/dark-theme'
 
 import 'fontsource-roboto'
-
 import '../styles/globals.css'
 import '../styles/layout.css'
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#7129bf'
-    },
-    secondary: {
-      main: '#7c7c7c'
+function MyApp({ Component, pageProps }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark')
+    } else {
+      setTheme('light')
     }
   }
-});
 
-function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <Component toggleTheme={toggleTheme} {...pageProps} />
     </ThemeProvider>
   )
 }
