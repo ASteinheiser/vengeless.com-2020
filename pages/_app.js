@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Provider } from 'react-redux'
+import { Provider, useStore } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from '@material-ui/core/styles'
 
@@ -11,26 +10,24 @@ import 'fontsource-roboto'
 import '../styles/globals.css'
 import '../styles/layout.css'
 
-function MyApp({ Component, pageProps }) {
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
-  }
-
+function WrappedApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          <Component toggleTheme={toggleTheme} {...pageProps} />
-        </ThemeProvider>
+        <MyApp Component={Component} pageProps={pageProps} />
       </PersistGate>
     </Provider>
   )
 }
 
-export default MyApp
+function MyApp({ Component, pageProps }) {
+  const { theme } = useStore().getState()
+
+  return (
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  )
+}
+
+export default WrappedApp
